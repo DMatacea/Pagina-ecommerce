@@ -1,5 +1,6 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 import { CreateShoppingProvider } from '../../Context'
+import { CheckoutSideMenu } from '../../Components/CheckoutSideMenu'
 import { Home } from '../Home'
 import { MyAccount } from '../MyAccount'
 import { MyOrder } from '../MyOrder'
@@ -28,9 +29,10 @@ function App() {
   return (
     <>
       <CreateShoppingProvider>
-        <div className='bg-red-500'>
+        <div className='bg-zinc-100'>
           <BrowserRouter>
             <NavBar/>
+            <CheckoutSideMenu/>
             <Layout>
               <AppRoutes/>
             </Layout>
