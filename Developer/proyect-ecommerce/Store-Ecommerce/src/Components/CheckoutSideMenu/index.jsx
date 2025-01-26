@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { CreateShoppingContex } from '../../Context'
 import { OrderCard } from '../OrderCard'
 
@@ -24,14 +25,16 @@ function CheckoutSideMenu(){
 
         context.setOrder([...context.order, orderToAdd])
         context.setCardBuy([])
+        context.setCount(0)
+        context.setCheckoutSideMenu(null)
     }
 
     return(
         <aside
-        className={`${context.checkoutSideMenu ? 'translate-x-0' : 'translate-x-full'} fixed top-[80px] right-0 w-[340px] h-[calc(100vh-80px)] flex flex-col justify-between border border-gray-200 bg-white shadow-2xl rounded-lg transition-transform duration-500 ease-in-out z-10`}
+        className={`${context.checkoutSideMenu ? 'translate-x-0' : 'translate-x-full'} fixed top-[80px] right-0 w-[320px] h-[calc(100vh-80px)] flex flex-col justify-between border border-gray-200 bg-white shadow-2xl rounded-lg transition-transform duration-500 ease-in-out z-10`}
         >
-            <div className="flex justify-between items-center p-5 bg-gradient-to-r from-[#74b0bb] to-[#088395] text-white rounded-t-lg">
-                <h2 className="font-semibold text-xl">My Order</h2>
+            <div className="flex justify-between items-center p-5 border-b border-gray-300">
+                <h2 className="font-medium text-xl bg-gradient-to-r from-[#071952] to-[#088395] bg-clip-text text-transparent">My Order</h2>
                 <div
                     onClick={() => context.toggleCardBuy(null)}
                     className="cursor-pointer hover:rotate-180 transform transition-transform duration-300"
@@ -62,12 +65,14 @@ function CheckoutSideMenu(){
                         ${totalPrice}
                     </span>
                 </div>
-                <button 
-                    className="mt-4 w-full bg-[#088395] text-white font-medium py-2 rounded-lg hover:bg-[#071952] transition-colors duration-300"
-                    onClick={() => handleCheckout()}
-                >
-                    Proceed to Checkout
-                </button>
+                <Link to='/myorders/last'>
+                    <button 
+                        className="mt-4 w-full bg-[#088395] text-white font-medium py-2 rounded-lg hover:bg-[#071952] transition-colors duration-300"
+                        onClick={() => handleCheckout()}
+                    >
+                        Proceed to Checkout
+                    </button>
+                </Link>
             </div>
         </aside>
 

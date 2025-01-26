@@ -1,5 +1,7 @@
-import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { useRoutes, BrowserRouter, useLocation } from 'react-router-dom'
 import { CreateShoppingProvider } from '../../Context'
+import { CreateShoppingContex } from '../../Context'
 import { CheckoutSideMenu } from '../../Components/CheckoutSideMenu'
 import { Home } from '../Home'
 import { MyAccount } from '../MyAccount'
@@ -16,8 +18,11 @@ function App() {
   const AppRoutes = () => {
     let routes = useRoutes([
       { path: '/', element: <Home/> },
+      { path: '/:category', element: <Home/> },
       { path: '/myaccount', element: <MyAccount/> },
       { path: '/myorder', element: <MyOrder/> },
+      { path: '/myorders/last', element: <MyOrder/> },
+      { path: '/myorders/:id', element: <MyOrder/> },
       { path: '/myorders', element: <MyOrders/> },
       { path: '/signin', element: <SignIn/> },
       { path: '/*', element: <NotFound/> },
@@ -29,7 +34,7 @@ function App() {
   return (
     <>
       <CreateShoppingProvider>
-        <div className='bg-zinc-100'>
+        <div className='bg-zinc-50 h-full w-full'>
           <BrowserRouter>
             <NavBar/>
             <CheckoutSideMenu/>
@@ -39,7 +44,6 @@ function App() {
           </BrowserRouter>
         </div>
       </CreateShoppingProvider>
-        
     </>
   )
 }

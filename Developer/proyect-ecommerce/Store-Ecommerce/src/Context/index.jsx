@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState ,useEffect } from 'react';
 
 export const CreateShoppingContex = createContext()
 
@@ -26,6 +26,40 @@ export const CreateShoppingProvider = ({ children }) => {
     //Product Buy - Add product to cart
     const [order, setOrder] = useState([])
 
+    //Get Products
+    const [product, setProduct] = useState(null)
+
+    //Filter Products
+    const [filterProduct, setfilterProduct] = useState([])
+    
+    //Get Products by Input
+    const [inputProduct, setinputProduct] = useState("")
+
+    //Get products by category
+    const [filterByCategory, setFilterByCategory] = useState([])
+
+    useEffect(() => {
+        fetch('https://api.escuelajs.co/api/v1/products')
+          .then(response => response.json())
+          .then(data => setProduct(data))
+      },[])
+
+    //Function to search by products
+    const filterProductByTitle = (product, inputProduct) => {
+        return product?.filter(products => products.title.toLowerCase().includes(inputProduct.toLowerCase()))
+    }
+
+    useEffect(() => {
+        if (filterByCategory) {
+            setfilterProduct(filterProductByTitle(filterByCategory, inputProduct));
+        } else if (inputProduct) {
+            setfilterProduct(filterProductByTitle(product, inputProduct));
+        } else {
+            setfilterProduct(product);
+        }
+    }, [product, inputProduct, filterByCategory]);
+
+
     return (
         <CreateShoppingContex.Provider value={{
             count,
@@ -40,7 +74,15 @@ export const CreateShoppingProvider = ({ children }) => {
             setCheckoutSideMenu,
             toggleCardBuy,
             order,
-            setOrder
+            setOrder,
+            product,
+            setProduct,
+            inputProduct,
+            setinputProduct,
+            filterProduct,
+            setfilterProduct,
+            filterByCategory,
+            setFilterByCategory
         }}>
             {children}
         </CreateShoppingContex.Provider>

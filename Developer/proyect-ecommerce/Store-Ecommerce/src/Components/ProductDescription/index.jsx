@@ -6,7 +6,7 @@ function ProductDescription(){
   
 return(
     <aside 
-        className={`${context.productDescription ? 'translate-x-0' : 'translate-x-full'} fixed top-[80px] right-0 w-[300px] h-[calc(100vh-80px)] flex flex-col border border-gray-200 bg-white shadow-lg rounded-lg         transition-transform duration-300 ease-in-out`}
+        className={`${context.productDescription ? 'translate-x-0' : 'translate-x-full'} fixed top-[80px] right-0 w-[320px] h-[calc(100vh-80px)] flex flex-col justify-between border border-gray-200 bg-white shadow-2xl rounded-lg transition-transform duration-500 ease-in-out z-10`}
     >
         <div className="flex justify-between items-center p-5 border-b border-gray-300">
             <h2 className="font-medium text-xl bg-gradient-to-r from-[#071952] to-[#088395] bg-clip-text text-transparent">
