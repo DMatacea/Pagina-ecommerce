@@ -16,7 +16,7 @@ function OrderCard(props) {
 
     return(
         <>
-            <div className="flex justify-between items-center mb-4 p-2 bg-gray-100 rounded-lg hover:shadow-md transition-all duration-300 gap-3">
+            <div className="flex justify-between w-[calc(100vw - 8px)] items-center mb-4 p-2 bg-gray-100 rounded-lg hover:shadow-md transition-all duration-300 gap-3">
                 <div className="flex items-center gap-3">
                     <figure className="w-16 h-16">
                         <img className="w-full h-full rounded-lg object-cover" src={imageUrl} alt={title} />

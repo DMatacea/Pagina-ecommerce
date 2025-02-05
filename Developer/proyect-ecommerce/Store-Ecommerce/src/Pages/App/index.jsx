@@ -1,7 +1,6 @@
-import { useContext, useEffect } from 'react'
-import { useRoutes, BrowserRouter, useLocation } from 'react-router-dom'
+import { useRoutes, BrowserRouter } from 'react-router-dom'
 import { CreateShoppingProvider } from '../../Context'
-import { CreateShoppingContex } from '../../Context'
+import { AuthProvider } from '../../Context/autentication'
 import { CheckoutSideMenu } from '../../Components/CheckoutSideMenu'
 import { Home } from '../Home'
 import { MyAccount } from '../MyAccount'
@@ -33,17 +32,19 @@ function App() {
 
   return (
     <>
-      <CreateShoppingProvider>
-        <div className='bg-zinc-50 h-full w-full'>
-          <BrowserRouter>
-            <NavBar/>
-            <CheckoutSideMenu/>
-            <Layout>
-              <AppRoutes/>
-            </Layout>
-          </BrowserRouter>
-        </div>
-      </CreateShoppingProvider>
+      <AuthProvider>
+        <CreateShoppingProvider>
+          <div className='bg-zinc-50 h-[calc(100vh-1px)] w-full'>
+            <BrowserRouter>
+              <NavBar/>
+              <CheckoutSideMenu/>
+              <Layout>
+                <AppRoutes/>
+              </Layout>
+            </BrowserRouter>
+          </div>
+        </CreateShoppingProvider>
+      </AuthProvider>
     </>
   )
 }

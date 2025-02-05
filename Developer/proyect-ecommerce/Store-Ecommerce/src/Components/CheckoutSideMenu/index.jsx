@@ -1,10 +1,16 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CreateShoppingContex } from '../../Context'
+import { AuthContext } from '../../Context/autentication'
 import { OrderCard } from '../OrderCard'
 
 function CheckoutSideMenu(){
     const context = useContext(CreateShoppingContex)
+    const contextAuth = useContext(AuthContext) 
+    const navigate = useNavigate()
+
+    const [textButton, setTextButton] = useState("Proceed to Checkout")
     
     const dateToday = new Date().toLocaleDateString()
 
@@ -16,22 +22,39 @@ function CheckoutSideMenu(){
     }
 
     const handleCheckout = () => {
-        const orderToAdd = {
-            date: dateToday,
-            products: context.cartBuy,
-            totalProducts: context.cartBuy.length,
-            totalPrice: totalPrice
-          }
-
-        context.setOrder([...context.order, orderToAdd])
-        context.setCardBuy([])
-        context.setCount(0)
-        context.setCheckoutSideMenu(null)
+        if(contextAuth.userVerify?.user){
+            navigate('/myorders/last')
+            const orderToAdd = {
+                date: dateToday,
+                products: context.cartBuy,
+                totalProducts: context.cartBuy.length,
+                totalPrice: totalPrice
+              }
+    
+            context.setOrder([...context.order, orderToAdd])
+            context.setCardBuy([])
+            context.setCount(0)
+            context.setCheckoutSideMenu(null)
+        }else{
+            setTextButton("Sing in")
+            navigate('/signin')
+            setTimeout(() => {
+                setTextButton("Proceed to Checkout")
+            }, 3000);
+        }
     }
 
     return(
         <aside
-        className={`${context.checkoutSideMenu ? 'translate-x-0' : 'translate-x-full'} fixed top-[80px] right-0 w-[320px] h-[calc(100vh-80px)] flex flex-col justify-between border border-gray-200 bg-white shadow-2xl rounded-lg transition-transform duration-500 ease-in-out z-10`}
+        className={`${context.checkoutSideMenu ? 'translate-x-0' : 'translate-x-full'} 
+                        fixed top-[80px] right-0 w-[320px] h-[calc(100vh-80px)] 
+                        flex flex-col justify-between  border border-gray-200 bg-white shadow-2xl 
+                        transition-transform duration-500 ease-in-out z-10
+                        sm:rounded-lg 
+                        max-sm:fixed max-sm:bottom-0 max-sm:top-auto max-sm:right-0 max-sm:left-0 max-sm:w-full max-sm:h-9/10
+                        max-sm:translate-y-0 max-sm:translate-x-0 
+                        ${context.checkoutSideMenu ? 'max-sm:translate-y-0' : 'max-sm:translate-y-full'} 
+                        max-sm:rounded-t-2xl max-sm:rounded-b-none`}
         >
             <div className="flex justify-between items-center p-5 border-b border-gray-300">
                 <h2 className="font-medium text-xl bg-gradient-to-r from-[#071952] to-[#088395] bg-clip-text text-transparent">My Order</h2>
@@ -65,14 +88,12 @@ function CheckoutSideMenu(){
                         ${totalPrice}
                     </span>
                 </div>
-                <Link to='/myorders/last'>
                     <button 
                         className="mt-4 w-full bg-[#088395] text-white font-medium py-2 rounded-lg hover:bg-[#071952] transition-colors duration-300"
                         onClick={() => handleCheckout()}
                     >
-                        Proceed to Checkout
+                        {textButton}
                     </button>
-                </Link>
             </div>
         </aside>
 

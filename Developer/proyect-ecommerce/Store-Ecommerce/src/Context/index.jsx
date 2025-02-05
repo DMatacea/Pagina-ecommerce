@@ -61,29 +61,33 @@ export const CreateShoppingProvider = ({ children }) => {
 
 
     return (
-        <CreateShoppingContex.Provider value={{
-            count,
-            setCount,
-            toggleCard,
-            productDescription,
-            productView,
-            setProductView,
-            cartBuy,
-            setCardBuy,
-            checkoutSideMenu,
-            setCheckoutSideMenu,
-            toggleCardBuy,
-            order,
-            setOrder,
-            product,
-            setProduct,
-            inputProduct,
-            setinputProduct,
-            filterProduct,
-            setfilterProduct,
-            filterByCategory,
-            setFilterByCategory
-        }}>
+        <CreateShoppingContex.Provider 
+            value={
+                {
+                    count,
+                    setCount,
+                    toggleCard,
+                    productDescription,
+                    productView,
+                    setProductView,
+                    cartBuy,
+                    setCardBuy,
+                    checkoutSideMenu,
+                    setCheckoutSideMenu,
+                    toggleCardBuy,
+                    order,
+                    setOrder,
+                    product,
+                    setProduct,
+                    inputProduct,
+                    setinputProduct,
+                    filterProduct,
+                    setfilterProduct,
+                    filterByCategory,
+                    setFilterByCategory
+                }
+            }
+        >
             {children}
         </CreateShoppingContex.Provider>
     )

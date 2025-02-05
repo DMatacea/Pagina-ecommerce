@@ -8,11 +8,11 @@ function MyOrders() {
 
     return (
       <>
-        <div className="w-full max-w-[376px] mx-auto">
-          <div className="flex items-center justify-center mb-6">
+        <div className="grid place-items-center w-full max-w-[376px] mx-auto">
+          <div className="flex items-center justify-center mt-2 mb-6">
             <h1 className="font-medium text-xl bg-gradient-to-r from-[#071952] to-[#088395] bg-clip-text text-transparent">My Orders</h1>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-[320px]">
             {context.order.map((order, index) => (
               <Link key={index} to={`/myorders/${index}`}>
                 <OrdersCard
