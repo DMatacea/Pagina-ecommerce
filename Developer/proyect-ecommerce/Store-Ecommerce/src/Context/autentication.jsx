@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [hasUsers, setHasUsers] = useState(false)
   const [userVerify, setUserVerify] = useState({})
 
-  console.log(userVerify.length)
   const checkForUsers = () => {
     const keys = Object.keys(localStorage)
     return keys.length > 0
